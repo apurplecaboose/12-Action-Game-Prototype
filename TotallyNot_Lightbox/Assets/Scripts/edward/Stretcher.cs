@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Stretcher : MonoBehaviour
 {
-    public GameObject Icon, Background;
+    public Transform Icon, Background, Anchor;
 
     public float scaleSpeed = 1f;
     public float minScaleX = 1f;
@@ -22,13 +22,13 @@ public class Stretcher : MonoBehaviour
 
         if (scroll != 0f)
         {
-            Vector3 newScale = transform.localScale;
+            Vector3 newScale = Anchor.localScale;
             newScale.x += scroll * scaleSpeed;
             newScale.x = Mathf.Clamp(newScale.x, minScaleX, maxScaleX);
-            transform.localScale = newScale;
+            Anchor.localScale = newScale;
         }
 
 
-        Icon.transform.position = Background.transform.position;
+        Icon.position = Background.position;
     }
 }
