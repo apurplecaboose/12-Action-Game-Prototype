@@ -7,7 +7,8 @@ public class gameManager : MonoBehaviour
 {
     public enum blockTypes { Left, Right, LeftJump, RightJump }; //The different types of blocks available
 
-    public List<blockTypes> queue = new List <blockTypes>(); //List of actions as defined by player in phase 1
+    public List<blockTypes> queue = new List <blockTypes>(); //List of 12 actions as defined by player in phase 1
+    public List<GameObject> slotPositions = new List<GameObject>();
 
     void Start()
     {
@@ -21,16 +22,20 @@ public class gameManager : MonoBehaviour
 
     void Update()
     {
-        //queue.Add(blockTypes.Left); When object with Left type is dragged into queue.
+        
     }
 
-    void PlaceIntoQueue (blockTypes block, int index) //This places the block into the index, moving all later blocks backwards 1 index.
+    public void PlaceIntoQueue (GameObject block, GameObject slotPosition) //This places the block into the index, moving all later blocks backwards 1 index.
     {
+        if (!Enum.TryParse(block.tag, out blockTypes type))
+        {
+            Debug.LogWarning("Tag does not match blockTypes enum: " + block.tag); //Ensure the block has a tag and it matches blockTypes tag
+            return;
+        }
 
+        int index = slotPositions.IndexOf(slotPosition);
+        if (index > queue.Count) index = queue.Count;
+
+        queue.Insert(index, type);
     }   
-    
-    void PushDownQueue () //This ensures there are no empty slots in the queue
-    {
-         
-    }
 }

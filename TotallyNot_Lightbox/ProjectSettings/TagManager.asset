@@ -7,6 +7,12 @@ TagManager:
   - Slot
   - SlotOccupied
   - PoolSlot
+  - Left
+  - Right
+  - LeftJump
+  - RightJump
+  - Continue
+  - Scroll
   layers:
   - Default
   - TransparentFX
