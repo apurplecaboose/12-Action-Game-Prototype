@@ -4,17 +4,13 @@ using UnityEngine;
 
 public class tile_positioner : MonoBehaviour
 {
-    public Transform PreviousTile;
-    float _localscaleX;
+    public List<GameObject> Tiles;
+    GameObject _StartingTile;
     void Start()
     {
-       
+        _StartingTile = Tiles[0];
     }
-
-    void Update()
+    private void Update()
     {
-        _localscaleX = PreviousTile.transform.localScale.x;
-        float xposition = _localscaleX + PreviousTile.transform.position.x;
-        this.transform.position = new Vector3(xposition, this.transform.position.y, this.transform.position.z);
     }
 }
