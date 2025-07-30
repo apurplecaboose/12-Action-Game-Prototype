@@ -23,7 +23,7 @@ public class TileType : MonoBehaviour
     public bool Resizable;
     float _resizeSpeed = 100f;
     Vector2Int _ResizeBounds = new Vector2Int(69, 420);
-    float _JumpForce = 6.25f;
+    float _JumpForce = 7.25f;
     float _MoveForce = 7;
     float _TopSpeed = 12f;
     float _JumpHorzPercentage = 1.0065f;
