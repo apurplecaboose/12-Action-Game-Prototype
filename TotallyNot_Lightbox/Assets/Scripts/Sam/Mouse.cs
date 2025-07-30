@@ -17,7 +17,6 @@ public class Mouse : MonoBehaviour
     GameObject handle;
     GameObject trueDestinationSlot;
     int destinationIndex;
-    bool scrolling;
     Transform queueParentPos;
 
     //Considerations:
@@ -31,23 +30,19 @@ public class Mouse : MonoBehaviour
         queueParentPos = rtGM.slotPositions[0].transform.parent;
     }
 
+    public void RightShiftButton()
+    {
+        if (queueParentPos.transform.position.x >= -4.5f) queueParentPos.transform.position -= new Vector3(0.75f, 0, 0);
+    }
+    public void LeftShiftButton()
+    {
+        if (queueParentPos.transform.position.x <= 4.5f) queueParentPos.transform.position += new Vector3(0.75f, 0, 0);
+    }
+
+
     void Update()
     {
         this.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10); //Position 'Mouse' object with cursor.
-
-        if (scrolling && Input.GetMouseButtonUp(0)) scrolling = false;
-        if (scrolling)
-        {
-            float handleMax = 1.2f; float handleMin = -1.2f;
-            float queueMax = 4.5f; float queueMin = -4.5f;
-            float clampedX = Mathf.Clamp(this.transform.position.x, -1.2f, 1.2f);
-            handle.transform.position = new Vector3(clampedX, handle.transform.position.y, handle.transform.position.z);
-
-            float t = (handle.transform.position.x - handleMin) / (handleMax - handleMin);
-            float queueX = Mathf.Lerp(queueMax, queueMin, t);
-
-            queueParentPos.position = new Vector3(queueX, queueParentPos.position.y, queueParentPos.position.z);
-        } //Scroll logic
 
         if (Input.GetMouseButtonDown(0)) //If clicking...
         {
@@ -61,10 +56,11 @@ public class Mouse : MonoBehaviour
                 originSlot = destinationSlot;
                 if (destinationSlot.CompareTag("PoolSlot") && destinationSlot.transform.childCount > 1) held = destinationSlot.transform.GetChild(1).gameObject; //pick up the Block.
                 else if (destinationSlot.CompareTag("SlotOccupied")) { held = destinationSlot.transform.GetChild(0).gameObject; }
-                if (held != null) 
+                if (held != null)
                 {
                     held.transform.parent = this.transform;
                     held.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.None;
+                    if (held.transform.childCount != 0) held.transform.GetChild(0).GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.None;
                     //held.transform.localScale = new Vector3(2f, 2f, 0);
                 }
 
@@ -287,11 +283,13 @@ public class Mouse : MonoBehaviour
         if (slot.CompareTag("Slot") || slot.CompareTag("SlotOccupied"))
         {
             block.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+            if (block.transform.childCount != 0) block.transform.GetChild(0).GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
             if (slot.CompareTag("Slot")) slot.tag = "SlotOccupied";
         }
         else if (slot.CompareTag("PoolSlot"))
         {
             block.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.None;
+            if (block.transform.childCount != 0) block.transform.GetChild(0).GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.None;
             if (origin.CompareTag("SlotOccupied")) origin.tag = "Slot";
         }
 
@@ -327,12 +325,11 @@ public class Mouse : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (destinationSlot == null && !scrolling && !collision.CompareTag("Scroll")) destinationSlot = collision.gameObject;
-        if (collision.CompareTag("Scroll") && Input.GetMouseButton(0) && held == null) { scrolling = true; handle = collision.gameObject; }
+        if (destinationSlot == null) destinationSlot = collision.gameObject;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (destinationSlot != null && !scrolling && !collision.CompareTag("Scroll")) destinationSlot = null;
+        if (destinationSlot != null) destinationSlot = null;
     }
 }
