@@ -5,21 +5,35 @@ using UnityEngine.UI;
 
 public class TileType : MonoBehaviour
 {
-    Image _image;
+    public enum TileTypeEnum
+    {
+        Left,
+        Right,
+        LeftJump,
+        RightJump,
+        NO_ACTION
+    }
+    
 
-    //prob some enum to tell which type of tile it is
-    //public float TileWidth; // view only
+    Image _image;
+    Rigidbody2D _rb;
+    //GroundCheck _gc;
+    [Header("Parameters")]
+    public TileTypeEnum _type;
     public bool Resizable;
     float _resizeSpeed = 100f;
     Vector2Int _ResizeBounds = new Vector2Int(69, 420);
+    float _JumpForce = 7.5f;
+    float _MoveForce = 7;
+    float _TopSpeed = 12f;
     void Start()
     {
         _image = this.GetComponent<Image>();
-        //TileWidth = _image.rectTransform.rect.width;
-        //set horizontal velocity to 0
-        //rb2D.velocity = new Vector2(0, rb2D.velocity.y);
-        //rb.velocity = new Vector3(0, rb.velocity.y, rb.velocity.z);
-        //add jump force here and maybe and trigger a bool for early return for everything else
+        GameObject playergameobj = GameObject.FindGameObjectWithTag("Player");
+        _rb = playergameobj.GetComponent<Rigidbody2D>();
+        //_gc = playergameobj.GetComponent<GroundCheck>();
+        _rb.velocity = new Vector2(0, _rb.velocity.y);
+        AddVerticalJumpImpulse();
     }
     void Update()
     {
@@ -30,8 +44,39 @@ public class TileType : MonoBehaviour
     }
     void FixedUpdate()
     {
-        print("Doing something forceful");
-        //add forces to player since script is active
+        AddHorizontalForceToPlayer();
+    }
+    void AddHorizontalForceToPlayer()
+    {
+        if (Mathf.Abs(_rb.velocity.x) > _TopSpeed)
+        {
+            //dont add force already reached top speed
+            return;
+        }
+        if (_type == TileTypeEnum.Left)
+        {
+            _rb.AddForce(new Vector2(-_MoveForce, 0));
+        }
+        else if (_type == TileTypeEnum.LeftJump)
+        {
+            _rb.AddForce(new Vector2(-_MoveForce, 0));
+        }
+        else if (_type == TileTypeEnum.Right)
+        {
+            _rb.AddForce(new Vector2(_MoveForce, 0));
+        }
+        else if (_type == TileTypeEnum.RightJump)
+        {
+            _rb.AddForce(new Vector2(_MoveForce, 0));
+        }
+    }
+    void AddVerticalJumpImpulse()
+    {
+        if (_type == TileTypeEnum.LeftJump || _type == TileTypeEnum.RightJump)
+        {
+            _rb.AddForce(new Vector2(0, _JumpForce), ForceMode2D.Impulse);
+            //add jump force here and maybe and trigger a bool for early return for everything else
+        }
     }
     void ScrollChangeScale()
     {
