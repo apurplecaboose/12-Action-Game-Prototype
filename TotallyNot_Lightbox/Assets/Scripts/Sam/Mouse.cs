@@ -99,7 +99,7 @@ public class Mouse : MonoBehaviour
 
                 else if (destinationSlot.CompareTag("SlotOccupied"))
                 {
-                    if (rtGM.queue.Count > 12)
+                    if (rtGM.Queue.Count > 12)
                     {
                         destinationIndex = rtGM.slotPositions.IndexOf(destinationSlot);
 
@@ -122,7 +122,7 @@ public class Mouse : MonoBehaviour
                         for (int i = emptyIndex; i > destinationIndex; i--)
                         {
                             GameObject blockToMove = rtGM.slotPositions[i - 1].transform.GetChild(0).gameObject;
-                            rtGM.queue.RemoveAt(i - 1);
+                            rtGM.Queue.RemoveAt(i - 1);
                             PlaceBlock(blockToMove, rtGM.slotPositions[i], rtGM.slotPositions[i - 1]);
                         }
 
@@ -183,7 +183,7 @@ public class Mouse : MonoBehaviour
                         for (int i = emptyIndex; i > destinationIndex; i--)
                         {
                             GameObject blockToMove = rtGM.slotPositions[i - 1].transform.GetChild(0).gameObject;
-                            rtGM.queue.RemoveAt(i - 1);
+                            rtGM.Queue.RemoveAt(i - 1);
                             PlaceBlock(blockToMove, rtGM.slotPositions[i], rtGM.slotPositions[i - 1]);
                         }
 
@@ -261,7 +261,7 @@ public class Mouse : MonoBehaviour
                     for (int i = emptyIndex; i > destinationIndex; i--)
                     {
                         GameObject blockToMove = rtGM.slotPositions[i - 1].transform.GetChild(0).gameObject;
-                        rtGM.queue.RemoveAt(i - 1);
+                        rtGM.Queue.RemoveAt(i - 1);
                         PlaceBlock(blockToMove, rtGM.slotPositions[i], rtGM.slotPositions[i - 1]);
                     }
 
@@ -297,21 +297,21 @@ public class Mouse : MonoBehaviour
     {
         int originIndex = rtGM.slotPositions.IndexOf(originSlot);
 
-        if (originIndex >= 0 && originIndex < rtGM.queue.Count)
+        if (originIndex >= 0 && originIndex < rtGM.Queue.Count)
         {
-            rtGM.queue.RemoveAt(originIndex);
+            rtGM.Queue.RemoveAt(originIndex);
 
-            if (rtGM.queue.Count != 0)
+            if (rtGM.Queue.Count != 0)
             {
-                for (int i = originIndex; i < rtGM.queue.Count; i++)
+                for (int i = originIndex; i < rtGM.Queue.Count; i++)
                 {
                     GameObject blockToMove = rtGM.slotPositions[i + 1].transform.GetChild(0).gameObject;
-                    rtGM.queue.RemoveAt(i);
+                    rtGM.Queue.RemoveAt(i);
                     PlaceBlock(blockToMove, rtGM.slotPositions[i], rtGM.slotPositions[i + 1]);
                 }
             }
 
-            rtGM.slotPositions[rtGM.queue.Count].tag = "Slot";
+            rtGM.slotPositions[rtGM.Queue.Count].tag = "Slot";
         }
     }
 
