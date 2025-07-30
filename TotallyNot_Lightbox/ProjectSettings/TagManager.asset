@@ -13,6 +13,7 @@ TagManager:
   - RightJump
   - Continue
   - Scroll
+  - Floor
   layers:
   - Default
   - TransparentFX

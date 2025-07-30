@@ -51,7 +51,7 @@ public class Mouse : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0)) //If clicking...
         {
-            if (destinationSlot != null && destinationSlot.CompareTag("Continue"))
+            if (destinationSlot != null && destinationSlot.CompareTag("Continue") && rtGM.Queue.Count > 0)
             {
                 SceneManager.LoadScene(1);
             }
@@ -320,13 +320,14 @@ public class Mouse : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    /**private void OnTriggerEnter2D(Collider2D collision)
     {
         if (destinationSlot == null && !scrolling && !collision.CompareTag("Scroll")) destinationSlot = collision.gameObject;
-    }
+    }**/
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        if (destinationSlot == null && !scrolling && !collision.CompareTag("Scroll")) destinationSlot = collision.gameObject;
         if (collision.CompareTag("Scroll") && Input.GetMouseButton(0) && held == null) { scrolling = true; handle = collision.gameObject; }
     }
 
