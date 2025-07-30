@@ -23,9 +23,10 @@ public class TileType : MonoBehaviour
     public bool Resizable;
     float _resizeSpeed = 100f;
     Vector2Int _ResizeBounds = new Vector2Int(69, 420);
-    float _JumpForce = 7.5f;
+    float _JumpForce = 6.25f;
     float _MoveForce = 7;
     float _TopSpeed = 12f;
+    float _JumpHorzPercentage = 1.0065f;
     void Start()
     {
         _image = this.GetComponent<Image>();
@@ -59,7 +60,7 @@ public class TileType : MonoBehaviour
         }
         else if (_type == TileTypeEnum.LeftJump)
         {
-            _rb.AddForce(new Vector2(-_MoveForce, 0));
+            _rb.AddForce(new Vector2(-_MoveForce * _JumpHorzPercentage, 0));
         }
         else if (_type == TileTypeEnum.Right)
         {
@@ -67,7 +68,7 @@ public class TileType : MonoBehaviour
         }
         else if (_type == TileTypeEnum.RightJump)
         {
-            _rb.AddForce(new Vector2(_MoveForce, 0));
+            _rb.AddForce(new Vector2(_MoveForce * _JumpHorzPercentage, 0));
         }
     }
     void AddVerticalJumpImpulse()

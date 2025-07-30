@@ -5,10 +5,9 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static gameManager;
-using static Unity.Collections.AllocatorManager;
 public class Mouse : MonoBehaviour
 {
+    public string SceneString;
     public gameManager rtGM;
     public PoolSlotManager rtPSM;
     public GameObject destinationSlot;
@@ -48,7 +47,7 @@ public class Mouse : MonoBehaviour
         {
             if (destinationSlot != null && destinationSlot.CompareTag("Continue") && rtGM.Queue.Count > 0)
             {
-                SceneManager.LoadScene(1);
+                SceneManager.LoadScene(SceneString);
             }
 
             else if (destinationSlot != null && held == null) //and not already holding anything...
