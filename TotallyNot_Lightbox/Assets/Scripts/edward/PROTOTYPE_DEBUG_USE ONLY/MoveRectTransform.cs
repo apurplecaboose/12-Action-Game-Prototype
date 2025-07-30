@@ -20,7 +20,7 @@ public class MoveRectTransform : MonoBehaviour
 
         if (Input.GetMouseButton(1)) // Right mouse held
         {
-            pos.x += 100f * Time.deltaTime;
+            pos.x += 600f * Time.deltaTime;
         }
 
         _t.position = pos;

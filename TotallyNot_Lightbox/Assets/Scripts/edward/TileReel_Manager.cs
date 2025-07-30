@@ -17,15 +17,17 @@ public class TileReel_Manager : MonoBehaviour
     public TileType RightPrefab;
     public TileType LeftJumpPrefab;
     public TileType RightJumpPrefab;
-
+    public InvisibleFinishTile FinishTile;
+    RectTransform _finishTileRectTransform;
     RectTransform _JudgementLine;
+    float _ScrollSpeed = 100;
     public RectTransform TileParent;
+
     [SerializeField] List<gameManager.BlockTypes> _InputSequence;
 
     List<Image> _tileimages;
     private void Awake()
     {
-        //fetch and copy _inputsequence;
         gameManager gm = FindFirstObjectByType<gameManager>();
         List<gameManager.BlockTypes> copyinputlist = new();
         copyinputlist = gm.Queue;
@@ -85,9 +87,36 @@ public class TileReel_Manager : MonoBehaviour
                 _tileimages.Add(instance.GetComponent<Image>());
             }
         }
+        _finishTileRectTransform = (RectTransform)Instantiate(FinishTile, TileParent.transform).transform; // Add the finish tile last AND CAST IT TO RECT TRANSFORM?!?!?!?!?!?
     }
 
     void Update()
+    {
+        ScrollReel();
+        if (CheckFinalInvisibletile()) return;
+        UpdateTileStates();
+    }
+    bool CheckFinalInvisibletile()
+    {
+        if (IsOverlapping(_JudgementLine, _finishTileRectTransform))
+        {
+            //disable last tile
+            Image lastimage = _tileimages[_tileimages.Count - 1];
+            lastimage.color = Color.gray;
+            if (lastimage.transform.TryGetComponent<TileType>(out var foundcomponent))
+            {
+                foundcomponent.enabled = false;
+            }
+            _ScrollSpeed += 50 * Time.deltaTime;
+            _ScrollSpeed = Mathf.Clamp(_ScrollSpeed, _ScrollSpeed, 420);
+            //activate finish tile script
+            _finishTileRectTransform.transform.GetComponent<InvisibleFinishTile>().enabled = true;
+            print("it has reached the end of the reel");
+            return true;
+        }
+        else return false;
+    }
+    void UpdateTileStates()
     {
         foreach (var i in _tileimages)
         {
@@ -108,6 +137,13 @@ public class TileReel_Manager : MonoBehaviour
                 }
             }
         }
+    }
+    void ScrollReel()
+    {
+        Vector3 pos = TileParent.position;
+        float theslightestsummerbreeze = 1 + (0.1f * Mathf.PerlinNoise1D(Time.time));
+        pos.x -= _ScrollSpeed * Time.deltaTime * theslightestsummerbreeze;
+        TileParent.position = pos;
     }
     bool IsOverlapping(RectTransform a, RectTransform b)
     {
