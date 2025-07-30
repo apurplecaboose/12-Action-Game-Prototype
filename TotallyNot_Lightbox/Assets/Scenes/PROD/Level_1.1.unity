@@ -3252,6 +3252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8795b569250ddeb4882e8752fedfdbd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SceneString: Level_1.2
   rtGM: {fileID: 625338348}
   rtPSM: {fileID: 1201410678}
   destinationSlot: {fileID: 0}

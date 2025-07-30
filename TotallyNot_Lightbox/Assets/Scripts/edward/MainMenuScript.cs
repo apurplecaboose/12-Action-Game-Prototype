@@ -15,7 +15,7 @@ public class MainMenuScript : MonoBehaviour
     }
     public void LOADLEVEL_1()
     {
-
+        SceneManager.LoadScene("Level_1.1");
     }
     public void LOADLEVEL_2()
     {
