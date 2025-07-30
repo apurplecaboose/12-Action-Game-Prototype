@@ -17,7 +17,7 @@ public class TileType : MonoBehaviour
 
     Image _image;
     Rigidbody2D _rb;
-    //GroundCheck _gc;
+    GroundCheck _gc;
     [Header("Parameters")]
     public TileTypeEnum _type;
     public bool Resizable;
@@ -31,7 +31,7 @@ public class TileType : MonoBehaviour
         _image = this.GetComponent<Image>();
         GameObject playergameobj = GameObject.FindGameObjectWithTag("Player");
         _rb = playergameobj.GetComponent<Rigidbody2D>();
-        //_gc = playergameobj.GetComponent<GroundCheck>();
+        _gc = playergameobj.GetComponent<GroundCheck>();
         _rb.velocity = new Vector2(0, _rb.velocity.y);
         AddVerticalJumpImpulse();
     }
@@ -72,6 +72,7 @@ public class TileType : MonoBehaviour
     }
     void AddVerticalJumpImpulse()
     {
+        if (!_gc.isGrounded) return;
         if (_type == TileTypeEnum.LeftJump || _type == TileTypeEnum.RightJump)
         {
             _rb.AddForce(new Vector2(0, _JumpForce), ForceMode2D.Impulse);
