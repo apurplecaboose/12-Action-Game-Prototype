@@ -141,10 +141,22 @@ public class TileReel_Manager : MonoBehaviour
     void ScrollReel()
     {
         Vector3 pos = TileParent.position;
+
+        // Reference resolution width
+        float referenceWidth = 1920f;
+
+        // Scale factor based on current screen width
+        float resolutionScale = Screen.width / referenceWidth;
+
+        // Optional: smooth variation using Perlin noise
         float theslightestsummerbreeze = 1 + (0.1f * Mathf.PerlinNoise1D(Time.time));
-        pos.x -= _ScrollSpeed * Time.deltaTime * theslightestsummerbreeze;
+
+        // Apply scaled scroll speed
+        pos.x -= _ScrollSpeed * resolutionScale * Time.deltaTime * theslightestsummerbreeze;
+
         TileParent.position = pos;
     }
+
     bool IsOverlapping(RectTransform a, RectTransform b)
     {
         Rect rectA = GetWorldRect(a);

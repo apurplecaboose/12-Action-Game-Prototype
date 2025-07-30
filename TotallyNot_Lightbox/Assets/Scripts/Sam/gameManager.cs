@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class gameManager : MonoBehaviour
 {
@@ -40,6 +41,15 @@ public class gameManager : MonoBehaviour
         if (index > Queue.Count) index = Queue.Count;
 
         Queue.Insert(index, type);
+    }
+    void Update()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        if (currentScene.buildIndex == 0 || currentScene.name == "MainMenu")
+        {
+            Destroy(gameObject);
+        }
     }
 }
 
