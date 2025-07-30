@@ -412,6 +412,7 @@ MonoBehaviour:
   RightPrefab: {fileID: 3414192773753146935, guid: d7f41c8ce0f21214eaaad14459849e39, type: 3}
   LeftJumpPrefab: {fileID: 4203640016076710939, guid: 01e973403427035469fb349538da19ac, type: 3}
   RightJumpPrefab: {fileID: 4591707494366905356, guid: 6f114be11cfed204ab48b9dca78ed14a, type: 3}
+  FinishTile: {fileID: 810010094385912268, guid: 096a8e9dcc6b6bf44b4e76bcf96705cf, type: 3}
   TileParent: {fileID: 756318629}
   _InputSequence: 
 --- !u!114 &1284220958
