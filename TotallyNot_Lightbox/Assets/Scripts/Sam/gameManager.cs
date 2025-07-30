@@ -12,24 +12,19 @@ public class gameManager : MonoBehaviour
 
     void Start()
     {
-        //GameObjects in Pool are displayed to the player.
-        //Player can then select objects from Pool or Queue. Click and Dragging moves said object with the cursor.
-        //If the object comes from pool, and is released in the queue, it is added into the position where the cursor is.
-        //Similarly, if the object comes from queue, and is released in pool, it is added into position where the cursor is.
-        //Make use of Mouse object, with triggers and colliders to detect when aboce certain spaces in the Pool or Queue.
 
     }
 
     void Update()
     {
-        
+
     }
 
-    public void PlaceIntoQueue (GameObject block, GameObject slotPosition) //This places the block into the index, moving all later blocks backwards 1 index.
+    public void AddToQueue (GameObject block, GameObject slotPosition) //This places the held block into the queue list at an index defined by slotPosition.
     {
         if (!Enum.TryParse(block.tag, out blockTypes type))
         {
-            Debug.LogWarning("Tag does not match blockTypes enum: " + block.tag); //Ensure the block has a tag and it matches blockTypes tag
+            print("Tag does not match blockTypes enum: " + block.tag); //Ensure the block has a tag and it matches blockTypes tag
             return;
         }
 
@@ -37,5 +32,6 @@ public class gameManager : MonoBehaviour
         if (index > queue.Count) index = queue.Count;
 
         queue.Insert(index, type);
-    }   
+    }
 }
+
