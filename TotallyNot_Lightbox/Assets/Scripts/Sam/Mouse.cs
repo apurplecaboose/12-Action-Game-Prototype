@@ -59,9 +59,9 @@ public class Mouse : MonoBehaviour
             else if (destinationSlot != null && held == null) //and not already holding anything...
             {
                 originSlot = destinationSlot;
-                if (destinationSlot.CompareTag("PoolSlot")) held = destinationSlot.transform.GetChild(1).gameObject; //pick up the Block.
+                if (destinationSlot.CompareTag("PoolSlot") && destinationSlot.transform.childCount > 1) held = destinationSlot.transform.GetChild(1).gameObject; //pick up the Block.
                 else if (destinationSlot.CompareTag("SlotOccupied")) { held = destinationSlot.transform.GetChild(0).gameObject; }
-                held.transform.parent = this.transform; held.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.None;
+                if (held != null) { held.transform.parent = this.transform; held.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.None; }
 
                 if (originSlot.CompareTag("SlotOccupied"))
                 {
