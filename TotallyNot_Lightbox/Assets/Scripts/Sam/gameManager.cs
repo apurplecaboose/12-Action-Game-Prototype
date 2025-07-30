@@ -50,6 +50,19 @@ public class gameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene("Level_1.1"); //HARDCODED
+            Destroy(gameObject);
+        }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            SceneManager.LoadScene("Level_1.2"); //HARDCODED
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MainMenu"); //HARDCODED
+        }
     }
 }
 
