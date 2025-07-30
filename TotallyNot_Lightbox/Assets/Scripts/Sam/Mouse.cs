@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static gameManager;
 using static Unity.Collections.AllocatorManager;
@@ -52,8 +53,7 @@ public class Mouse : MonoBehaviour
         {
             if (destinationSlot != null && destinationSlot.CompareTag("Continue"))
             {
-                print("NEXT SCENE");
-                //Time to give the value of rtGM.queue to Ed in the next scene.
+                SceneManager.LoadScene(1);
             }
 
             else if (destinationSlot != null && held == null) //and not already holding anything...
@@ -99,7 +99,7 @@ public class Mouse : MonoBehaviour
 
                 else if (destinationSlot.CompareTag("SlotOccupied"))
                 {
-                    if (rtGM.Queue.Count > 12)
+                    if (rtGM.Queue.Count < 12)
                     {
                         destinationIndex = rtGM.slotPositions.IndexOf(destinationSlot);
 
