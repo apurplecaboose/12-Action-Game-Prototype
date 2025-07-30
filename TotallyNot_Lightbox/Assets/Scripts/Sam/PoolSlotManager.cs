@@ -20,15 +20,15 @@ public class PoolSlotManager : MonoBehaviour
     {
         leftMesh1.text = pool1.transform.childCount - 1 + "x";
         if (leftMesh1.text == "0x") leftMesh1.color = new Color(0.5f, 0.5f, 0.5f, 1f);
-        else leftMesh1.color = new Color(1f, 1f, 1f, 1f);
+        else leftMesh1.color = new Color(0f, 0f, 0f, 1f);
         rightMesh2.text = pool2.transform.childCount - 1 + "x";
         if (rightMesh2.text == "0x") rightMesh2.color = new Color(0.5f, 0.5f, 0.5f, 1f);
-        else rightMesh2.color = new Color(1f, 1f, 1f, 1f);
+        else rightMesh2.color = new Color(0f, 0f, 0f, 1f);
         lJumpMesh3.text = pool3.transform.childCount - 1 + "x";
         if (lJumpMesh3.text == "0x") lJumpMesh3.color = new Color(0.5f, 0.5f, 0.5f, 1f);
-        else lJumpMesh3.color = new Color(1f, 1f, 1f, 1f);
+        else lJumpMesh3.color = new Color(0f, 0f, 0f, 1f);
         rJumpMesh4.text = pool4.transform.childCount - 1 + "x";
         if (rJumpMesh4.text == "0x") rJumpMesh4.color = new Color(0.5f, 0.5f, 0.5f, 1f);
-        else rJumpMesh4.color = new Color(1f, 1f, 1f, 1f);
+        else rJumpMesh4.color = new Color(0f, 0f, 0f, 1f);
     }
 }
