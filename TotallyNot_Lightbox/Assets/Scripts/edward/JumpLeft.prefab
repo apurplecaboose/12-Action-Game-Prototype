@@ -164,5 +164,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc7e2f2b71b57cb4fa4b8737533be413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TileWidth: 100
+  _type: 2
   Resizable: 0
