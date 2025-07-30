@@ -9,10 +9,10 @@ EditorBuildSettings:
     path: Assets/Scenes/PROD/MainMenu.unity
     guid: 052a510127b01cf409bfd6b87ac5d75d
   - enabled: 1
-    path: Assets/Scenes/QueuePhase.unity
+    path: Assets/Scenes/PROD/Level_1.1.unity
     guid: 533fd958fbbb39f4cbe66f7af0354f81
   - enabled: 1
-    path: Assets/Scenes/T_timelinescroll.unity
+    path: Assets/Scenes/PROD/Level_1.2.unity
     guid: 27f4ac9a64744d04ea929873279e479d
   - enabled: 1
     path: Assets/Scenes/PROD/LoseScene.unity
