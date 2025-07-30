@@ -4,13 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 public class TileReel_Manager : MonoBehaviour
 {
-    public enum BlockType
-    {
-        Left,
-        Right,
-        LeftJump,
-        RightJump
-    }
+    //public enum BlockType
+    //{
+    //    Left,
+    //    Right,
+    //    LeftJump,
+    //    RightJump
+    //}
+    //[SerializeField] List<BlockType> _InputSequence;
 
     public TileType LeftPrefab;
     public TileType RightPrefab;
@@ -19,34 +20,63 @@ public class TileReel_Manager : MonoBehaviour
 
     RectTransform _JudgementLine;
     public RectTransform TileParent;
+    [SerializeField] List<gameManager.BlockTypes> _InputSequence;
 
-    [SerializeField] List<BlockType> _InputSequence;
     List<Image> _tileimages;
     private void Awake()
     {
         //fetch and copy _inputsequence;
+        gameManager gm = FindFirstObjectByType<gameManager>();
+        List<gameManager.BlockTypes> copyinputlist = new();
+        copyinputlist = gm.Queue;
+        _InputSequence = new();
+        _InputSequence = copyinputlist;
     }
     void Start()
     {
         _tileimages = new();
         _JudgementLine = this.GetComponent<RectTransform>();
 
+        //for (int i = 0; i < _InputSequence.Count; i++)
+        //{
+        //    Transform instance = null;
+        //    if (_InputSequence[i] == BlockType.Left)
+        //    {
+        //        instance = Instantiate(LeftPrefab, TileParent.transform).transform;  
+        //    }
+        //    else if (_InputSequence[i] == BlockType.Right)
+        //    {
+        //        instance = Instantiate(RightPrefab, TileParent.transform).transform;
+        //    }
+        //    else if (_InputSequence[i] == BlockType.LeftJump)
+        //    {
+        //        instance = Instantiate(LeftJumpPrefab, TileParent.transform).transform;
+        //    }
+        //    else if (_InputSequence[i] == BlockType.RightJump)
+        //    {
+        //        instance = Instantiate(RightJumpPrefab, TileParent.transform).transform;
+        //    }
+        //    if (instance != null)
+        //    {
+        //        _tileimages.Add(instance.GetComponent<Image>());
+        //    }
+        //}
         for (int i = 0; i < _InputSequence.Count; i++)
         {
             Transform instance = null;
-            if (_InputSequence[i] == BlockType.Left)
+            if (_InputSequence[i] == gameManager.BlockTypes.Left)
             {
-                instance = Instantiate(LeftPrefab, TileParent.transform).transform;  
+                instance = Instantiate(LeftPrefab, TileParent.transform).transform;
             }
-            else if (_InputSequence[i] == BlockType.Right)
+            else if (_InputSequence[i] == gameManager.BlockTypes.Right)
             {
                 instance = Instantiate(RightPrefab, TileParent.transform).transform;
             }
-            else if (_InputSequence[i] == BlockType.LeftJump)
+            else if (_InputSequence[i] == gameManager.BlockTypes.LeftJump)
             {
                 instance = Instantiate(LeftJumpPrefab, TileParent.transform).transform;
             }
-            else if (_InputSequence[i] == BlockType.RightJump)
+            else if (_InputSequence[i] == gameManager.BlockTypes.RightJump)
             {
                 instance = Instantiate(RightJumpPrefab, TileParent.transform).transform;
             }

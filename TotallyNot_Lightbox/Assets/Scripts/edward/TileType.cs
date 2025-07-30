@@ -8,14 +8,14 @@ public class TileType : MonoBehaviour
     Image _image;
 
     //prob some enum to tell which type of tile it is
-    public float TileWidth; // view only
+    //public float TileWidth; // view only
     public bool Resizable;
     float _resizeSpeed = 100f;
     Vector2Int _ResizeBounds = new Vector2Int(69, 420);
     void Start()
     {
         _image = this.GetComponent<Image>();
-        TileWidth = _image.rectTransform.rect.width;
+        //TileWidth = _image.rectTransform.rect.width;
         //set horizontal velocity to 0
         //rb2D.velocity = new Vector2(0, rb2D.velocity.y);
         //rb.velocity = new Vector3(0, rb.velocity.y, rb.velocity.z);
