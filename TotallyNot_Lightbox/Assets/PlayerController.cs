@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space)) && GetComponent<GroundCheck>().isGrounded) //Jump
+        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) && GetComponent<GroundCheck>().isGrounded) //Jump
         {
             rtRB.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
         }
